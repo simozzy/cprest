@@ -1,0 +1,32 @@
+{
+  "$schema": "https://qooxdoo.org/schema/compile-1-0-0.json",
+  "targets": [
+    {
+      "type": "source",
+      "outputPath": "compiled/source",
+      "bundle": {
+        "include": "qx.*"
+      }
+    },
+    {
+      "type": "build",
+      "outputPath": "compiled/build"
+    }
+  ],
+  "serve": {
+    "listenPort": 8002
+  },
+  "defaultTarget": "source",
+  "locales": ["en"],
+  "environment": {
+      "qx.icontheme": "Tango"
+  },
+  "applications": [
+    {
+      "class": "restcp.Application",
+      "theme": "restcp.theme.Theme",
+      "name": "restcp",
+      "bootPath": "source/boot"
+    }
+  ]
+}
