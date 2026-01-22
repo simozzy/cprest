@@ -1,13 +1,14 @@
+
 qx.Class.define("restcp.service.WorkspaceService", {
   extend: restcp.service.BaseService,
 
   construct() {
     this.base(arguments);
-    this.setBaseUrl("http://localhost:8001/control-plane/workspaces");
+    this.setBaseUrl(restcp.Constants.URLS.CONTROL_PLANE + "/workspaces");
 
     // Map routes - these create methods on the resource
     this.map("getAll", "GET", "/");
-    this.map("getOne", "GET", "/{id}");
+    this.map("get", "GET", "/{id}");
     this.map("create", "POST", "/");
     this.map("update", "PUT", "/{id}");
     this.map("delete", "DELETE", "/{id}");
@@ -18,7 +19,7 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * Get all workspaces
      * @return {Promise} Promise that resolves with workspace list
      */
-    getAllWorkspaces() {
+    getAll() {
       return this.sendRequest("getAll");
     },
 
@@ -27,8 +28,8 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * @param {String} id - Workspace ID
      * @return {Promise} Promise that resolves with workspace data
      */
-    getWorkspace(id) {
-      return this.sendRequest("getOne", { id: id });
+    get(id) {
+      return this.sendRequest("get", { id: id });
     },
 
     /**
@@ -36,7 +37,7 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * @param {Object} data - Workspace data
      * @return {Promise} Promise that resolves with created workspace
      */
-    createWorkspace(data) {
+    create(data) {
       return this.sendRequest("create", null, data);
     },
 
@@ -46,7 +47,7 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * @param {Object} data - Updated workspace data
      * @return {Promise} Promise that resolves with updated workspace
      */
-    updateWorkspace(id, data) {
+    update(id, data) {
       return this.sendRequest("update", { id: id }, data);
     },
 
@@ -55,7 +56,7 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * @param {String} id - Workspace ID
      * @return {Promise} Promise that resolves when deletion is complete
      */
-    deleteWorkspace(id) {
+    delete(id) {
       return this.sendRequest("delete", { id: id });
     }
   }
