@@ -21,8 +21,6 @@ Authors:
  */
 qx.Class.define("restcp.utils.Errors", {
     extend: qx.core.Object,
-    type: "singleton",
-
     statics: {
         handleError: function(error) {
             // This will be extended to handle different error types and display appropriate messages

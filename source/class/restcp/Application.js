@@ -26,6 +26,9 @@ qx.Class.define("restcp.Application", {
           restcp.utils.Errors.handleError(error);
         });
       } else {
+        // Check that all the service can be instantiated (a badly defined service can often cause this error)
+        restcp.utils.PreConditions.checkServices();
+
         // Load the json from a file
         const organizationService = new restcp.service.OrganizationService();
         organizationService.getAllOrgs().then(organizations => {
