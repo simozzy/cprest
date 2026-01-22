@@ -28,7 +28,7 @@ qx.Class.define("restcp.Constants", {
             CONTROL_PLANE: "https://controlplane.plaidcloud.io/control-plane"
             // CONTROL_PLANE: "http://localhost:8001/control-plane"
         },
-        USE_MOCKS: true, // Set to true to use mock data instead of actual API calls,
+        USE_MOCKS: false, // Set to true to use mock data instead of actual API calls,
         REST_SERVICES: {
             "users": restcp.service.UsersService,
             "user": restcp.service.UserService,
