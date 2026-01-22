@@ -11,7 +11,7 @@ qx.Class.define("restcp.service.UsersService", {
      * Get all users
      * @return {Promise} Promise that resolves with user data
      */
-    getUsers(id) {
+    getUsers() {
       return this.sendRequest("get");
     }
   }

@@ -13,7 +13,7 @@ qx.Class.define("restcp.service.BillingsService", {
   members: {
     /**
      * Get billings for a specific organization by ID
-     * @param {String} id - Organization ID
+     * @param {String} organizatiopnId - Organization ID
      * @return {Promise} Promise that resolves with organization data
      */
     getBillings(organizatiopnId) {

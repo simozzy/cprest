@@ -23,7 +23,7 @@ qx.Class.define("restcp.Application", {
         }).then(organizations => {
           this._createOrganizationTable(organizations);
         }).catch(error => {
-          console.error("Failed to load organizations:", error);
+          restcp.utils.Errors.handleError(error);
         });
       } else {
         // Load the json from a file
@@ -31,7 +31,7 @@ qx.Class.define("restcp.Application", {
         organizationService.getAllOrgs().then(organizations => {
           this._createOrganizationTable(organizations);
         }).catch(error => {
-          console.error("Failed to load organizations:", error);
+          restcp.utils.Errors.handleError(error);
         });
       }
     },
