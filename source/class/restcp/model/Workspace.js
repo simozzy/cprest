@@ -1,0 +1,38 @@
+qx.Class.define("restcp.model.Workspace",
+{
+  extend: qx.core.Object,
+
+  properties: {
+    id: String,
+    name: String,
+    memoExpand: String,
+    owner_email: String,
+    cluster_id: String,
+    organization_id: String,
+    channel: String,
+    version: String,
+    is_active: Boolean,
+    is_paused: Boolean,
+    workspace: String,
+    maintenance_day: String,
+    maintenance_time: String,
+    app_logo: String,
+    splash_screen_logo: String,
+    superset_logo: String,
+    superset_custom_themes: Array,
+    cdc_enabled: Boolean,
+    custom_app_sandbox_enabled: Boolean,
+    formsflow_enabled: Boolean,
+    jupyterhub_enabled: Boolean,
+    project_enabled: Boolean,
+    proxy_download_enabled: Boolean,
+    sftp_enabled: Boolean,
+    sql_console_enabled: Boolean,
+    superset_enabled: Boolean,
+    vector_database_enabled: Boolean,
+    lakehouse_additional_users: Array,
+    lakehouse_external_accessExpand: Boolean,
+    lakehouse_cidr_allowedExpand: String,
+    lakehouse_cidr_deniedExpand: String
+  }
+});

@@ -6,9 +6,9 @@ qx.Class.define("restcp.auth.AuthManager", {
     _refreshToken: null,
     _tokenExpiry: null,
     _keycloakConfig: {
-      url: " http://localhost:8080/auth",
+      url: "http://localhost:8080/auth",
       realm: "PlaidCloud",
-      clientId: "admin-cli"
+      clientId: "plaidcloud-login"
     },
 
     setTokens(accessToken, refreshToken, expiresIn) {
@@ -18,7 +18,9 @@ qx.Class.define("restcp.auth.AuthManager", {
     },
 
     getAccessToken() {
-      if (!this._accessToken) return null;
+      if (!this._accessToken) {
+        return null;
+      }
 
       const now = Math.floor(Date.now() / 1000);
       if (this._tokenExpiry - now < 30) {
@@ -30,14 +32,22 @@ qx.Class.define("restcp.auth.AuthManager", {
     attachAuthHeader(req) {
       const token = this.getAccessToken();
       if (token instanceof Promise) {
-        return token.then(t => t && req.setRequestHeader("Authorization", "Bearer " + t));
+        return token.then(t => {
+          if (t) {
+            req.setRequestHeader("Authorization", "Bearer " + t);
+          }
+          return req;
+        });
       } else if (token) {
         req.setRequestHeader("Authorization", "Bearer " + token);
       }
+      return null; // Return null when no promise is needed
     },
 
     async refreshToken() {
-      if (!this._refreshToken) return null;
+      if (!this._refreshToken) {
+        return null;
+      }
 
       const req = new qx.io.request.Xhr(
         `${this._keycloakConfig.url}/realms/${this._keycloakConfig.realm}/protocol/openid-connect/token`,
@@ -77,16 +87,16 @@ qx.Class.define("restcp.auth.AuthManager", {
       const hash = window.location.hash.substring(1);
       const params = new URLSearchParams(hash);
       const token = params.get("access_token");
-      const refreshToken = params.get("refresh_token");
       const expiresIn = parseInt(params.get("expires_in")) || 3600;
-      if (token && refreshToken) {
-        this.setTokens(token, refreshToken, expiresIn);
+
+      if (token) {
+        // Implicit flow doesn't provide refresh_token, so pass null
+        this.setTokens(token, null, expiresIn);
         window.location.hash = ""; // clean URL
       }
     },
 
     login() {
-      debugger
       const redirectUri = window.location.origin + window.location.pathname;
       const { url, realm, clientId } = this._keycloakConfig;
       const keycloakUrl = `${url}/realms/${realm}/protocol/openid-connect/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=token`;

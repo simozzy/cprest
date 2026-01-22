@@ -14,11 +14,14 @@ qx.Class.define("restcp.Application", {
         return;
       }
 
-      // Load user list
-      const userService = new restcp.service.UserService();
-      userService.sendRequest("getAll")
-        .then(users => console.log("Users:", users))
-        .catch(err => console.error("Error fetching users:", err));
+      // Load workspaces
+      const workspaceService = new restcp.service.WorkspaceService();
+      workspaceService.getAllWorkspaces()
+        .then(workspaces => {
+          window.alert(JSON.stringify(workspaces));
+        }).catch(err => {
+          window.alert("Error:" + JSON.stringify(err));
+        });
     }
   }
 });
