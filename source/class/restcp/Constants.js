@@ -25,8 +25,9 @@ qx.Class.define("restcp.Constants", {
 
     statics: {
         URLS: {
-            //CONTROL_PLANE: "https://controlplane.plaidcloud.io/control-plane", //Production
-            CONTROL_PLANE: "http://localhost:8001/control-plane"
-        }
+            CONTROL_PLANE: "https://controlplane.plaidcloud.io/control-plane"
+            //CONTROL_PLANE: "http://localhost:8001/control-plane"
+        },
+        USE_MOCKS: false // Set to true to use mock data instead of actual API calls
     }
 });

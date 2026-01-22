@@ -8,7 +8,7 @@ qx.Class.define("restcp.service.OrganizationService", {
 
     // Map routes - these create methods on the resource
     this.map("getAll", "GET", "/");
-    this.map("get", "GET", "/{id}");
+    this.map("getOne", "GET", "/{id}");
     this.map("create", "POST", "/");
     this.map("update", "PUT", "/{id}");
     this.map("delete", "DELETE", "/{id}");
@@ -23,7 +23,7 @@ qx.Class.define("restcp.service.OrganizationService", {
      * Get all organizations
      * @return {Promise} Promise that resolves with organization list
      */
-    getAll() {
+    getAllOrgs() {
       return this.sendRequest("getAll");
     },
 
@@ -32,7 +32,7 @@ qx.Class.define("restcp.service.OrganizationService", {
      * @param {String} id - Organization ID
      * @return {Promise} Promise that resolves with organization data
      */
-    get(id) {
+    getOrg(id) {
       return this.sendRequest("getOne", { id: id });
     },
 
@@ -41,7 +41,7 @@ qx.Class.define("restcp.service.OrganizationService", {
      * @param {Object} data - Organization data
      * @return {Promise} Promise that resolves with created organization
      */
-    create(data) {
+    createOrg(data) {
       return this.sendRequest("create", null, data);
     },
 
@@ -51,7 +51,7 @@ qx.Class.define("restcp.service.OrganizationService", {
      * @param {Object} data - Updated workspace data
      * @return {Promise} Promise that resolves with updated organization
      */
-    update(id, data) {
+    updateOrg(id, data) {
       return this.sendRequest("update", { id: id }, data);
     },
 
@@ -60,7 +60,7 @@ qx.Class.define("restcp.service.OrganizationService", {
      * @param {String} id - Organization ID
      * @return {Promise} Promise that resolves when deletion is complete
      */
-    delete(id) {
+    deleteOrg(id) {
       return this.sendRequest("delete", { id: id });
     },
 
@@ -70,7 +70,7 @@ qx.Class.define("restcp.service.OrganizationService", {
      * @param {Object} data - will conatain a CreateInvitation
      * @return {Promise} Promise that resolves when invitation is created
      */
-    createInvite(id, data) {
+    async createOrgInvite(id, data) {
         return this.sendRequest("createInvite", { id: id }, data);
     },
 
@@ -79,7 +79,7 @@ qx.Class.define("restcp.service.OrganizationService", {
      * @param {String} id - Organization ID
      * @returns {Object} Promise that resolves with an array of Invitation objects
      */
-    getInvites(id) {
+    async getOrgInvites(id) {
         return this.sendRequest("getInvites", { id: id });
     },
 
@@ -89,7 +89,7 @@ qx.Class.define("restcp.service.OrganizationService", {
      * @param {String} inviteId - Invite ID
      * @returns {Object} Promise that resolves when invitation is deleted
      */
-    deleteInvite(id, inviteId) {
+    async deleteOrgInvite(id, inviteId) {
         return this.sendRequest("deleteInvite", { id: id, inviteId: inviteId });
     },
 
@@ -99,7 +99,7 @@ qx.Class.define("restcp.service.OrganizationService", {
      * @param {String} inviteId - Invite ID
      * @returns {Object} Promise that resolves when invitation is accepted
      */
-    acceptInvite(id, inviteId) {
+    async acceptOrgInvite(id, inviteId) {
         return this.sendRequest("deleteInvite", { id: id, inviteId: inviteId });
     }
   }

@@ -19,7 +19,7 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * Get all workspaces
      * @return {Promise} Promise that resolves with workspace list
      */
-    getAll() {
+    getAllWorkspaces() {
       return this.sendRequest("getAll");
     },
 
@@ -28,7 +28,7 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * @param {String} id - Workspace ID
      * @return {Promise} Promise that resolves with workspace data
      */
-    get(id) {
+    getWorkspace(id) {
       return this.sendRequest("get", { id: id });
     },
 
@@ -37,7 +37,7 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * @param {Object} data - Workspace data
      * @return {Promise} Promise that resolves with created workspace
      */
-    create(data) {
+    createWorkspace(data) {
       return this.sendRequest("create", null, data);
     },
 
@@ -47,7 +47,7 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * @param {Object} data - Updated workspace data
      * @return {Promise} Promise that resolves with updated workspace
      */
-    update(id, data) {
+    updateWorkspace(id, data) {
       return this.sendRequest("update", { id: id }, data);
     },
 
@@ -56,7 +56,7 @@ qx.Class.define("restcp.service.WorkspaceService", {
      * @param {String} id - Workspace ID
      * @return {Promise} Promise that resolves when deletion is complete
      */
-    delete(id) {
+    deleteWorkspace(id) {
       return this.sendRequest("delete", { id: id });
     }
   }
